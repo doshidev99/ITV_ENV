@@ -13,7 +13,15 @@ export const CmsLayout = ({ children }) => {
   return (
     <WrapperCmsLayout>
       <Row className="h-100">
-        <Col span={5}>
+        <Col
+          span={4}
+          style={{
+            position: "fixed",
+            width: "100%",
+            height: "100%",
+            zIndex: 999,
+          }}
+        >
           <WrapperSidebar>
             <Row className="flex-column justify-content-between align-items-center h-100">
               <Col>
@@ -28,12 +36,16 @@ export const CmsLayout = ({ children }) => {
                   <ListMenu />
                 </WrapperListMenu>
               </Col>
-              <Col>
+              <Col
+                style={{
+                  position: "absolute",
+                  bottom: "10%",
+                }}
+              >
                 <div
                   className="text-hidden text-center"
                   style={{
                     fontSize: "12px",
-                    paddingBottom: "94px",
                   }}
                 >
                   @Copyright
@@ -42,11 +54,12 @@ export const CmsLayout = ({ children }) => {
             </Row>
           </WrapperSidebar>
         </Col>
-
+        <Col span={4}></Col>
         <Col
-          span={19}
+          span={20}
           style={{
             padding: "43px 60px",
+            background: "#E5E5E5",
           }}
         >
           {children}
@@ -56,14 +69,7 @@ export const CmsLayout = ({ children }) => {
   );
 };
 
-const WrapperCmsLayout = styled.div`
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: block;
-  position: fixed;
-`;
+const WrapperCmsLayout = styled.div``;
 
 const WrapperSidebar = styled.div`
   height: 100%;

@@ -2,9 +2,11 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { Form, Button } from "antd";
+
+import UserApi from "api/UserApi";
 
 import { AuthLayout } from "layout/AuthLayout";
 
@@ -18,10 +20,27 @@ import { ReactComponent as Google } from "assets/images/IC/Google.svg";
 import { ReactComponent as Facebook } from "assets/images/IC/FB.svg";
 
 const Register = () => {
+  const history = useHistory();
+
+  const onFinish = (value) => {
+    const { name, email, password } = value;
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    UserApi.register({
+      firstName: name,
+      lastName: " ",
+      email,
+      password,
+      timeZone,
+    }).then((res) => {
+      if (res?.status === 200) {
+        history.push("/login");
+      }
+    });
+  };
   return (
     <AuthLayout>
       <h2>Sign Up</h2>
-      <Form>
+      <Form onFinish={onFinish}>
         <InputCustomer
           label="name"
           placeholder=""
@@ -69,7 +88,9 @@ const Register = () => {
         <div className="text-center">
           Already have an account?
           <div className="font-weight-bold d-inline pl-3 font-root">
-            <Link to="/login" style={{ color: "#FFC8BF" }}>Login</Link>
+            <Link to="/login" style={{ color: "#FFC8BF" }}>
+              Login
+            </Link>
           </div>
         </div>
       </WrapperOtherSignUp>

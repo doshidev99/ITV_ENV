@@ -13,3 +13,19 @@
 .text-hidden {
   color: #bdc3f9;
 }
+
+input.ant-input.root-placeholder::placeholder {
+  color: #808191;
+}
+.ant-picker-input > input::placeholder {
+  color: #808191;
+}
+
+.text-tittle {
+  color: #858bac;
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+}

@@ -10,11 +10,13 @@ import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 import authReducer from "./redux-store/auth";
+import projectReducer from "./redux-store/project";
 
 import App from "./App";
 
 const reducer = combineReducers({
   authReducer,
+  projectReducer,
 });
 
 export const store = configureStore({ reducer });

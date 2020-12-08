@@ -31,12 +31,12 @@ export const AuthLayout = ({ children }) => {
 };
 
 const WrapperLayout = styled.div`
-  top: 0;
+  /* top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   display: block;
-  position: fixed;
+  position: fixed; */
 `;
 
 const WrapperForm = styled.div`

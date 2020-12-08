@@ -1,13 +1,46 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Row, Col } from "antd";
+import { Row, Col, Dropdown, Menu } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+import { actions } from "redux-store/auth";
 
 import { ReactComponent as Bell } from "assets/images/bell.svg";
-import { ReactComponent as Stroke } from "assets/images/stroke.svg";
-import avatar from "assets/images/Avatar/avatar.png";
+import avatarDefault from "assets/images/Avatar/avatar.png";
 
-export const NameWorkSpace = (props) => {
+export const NameWorkSpace = () => {
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+
+  const logout = () => {
+    dispatch(actions.logout());
+    history.push("/login");
+  };
+
+  const menu = (
+    <Menu>
+      <Menu.Item
+        key="1"
+        style={{
+          borderRadius: "12px",
+          background: "none",
+        }}
+        onClick={logout}
+      >
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
+
+  const { avatar, firstName, lastName } = JSON.parse(
+    localStorage.getItem("userInfo")
+  );
+
   return (
     <Row className="justify-content-between align-items-center">
       <Col>
@@ -27,15 +60,25 @@ export const NameWorkSpace = (props) => {
         <Row className="align-items-center justify-content-end">
           <WrapperNotification>
             <Bell className="bell" style={{ cursor: "pointer" }} />
-            <div>2</div>
+            <div className="text-white">2</div>
           </WrapperNotification>
           <WrapperAvatar>
-            <img src={avatar} alt="" className="w-100 h-100" />
+            <img src={avatar || avatarDefault} alt="" />
           </WrapperAvatar>
-          <div className="font-root text-dark font-weight-bold px-1">
-            Dines Anandavel
-          </div>
-          <Stroke />
+
+          <Dropdown overlay={menu}>
+            <Row
+              align="middle"
+              justify="center"
+              className=" font-root text-dark font-weight-bold px-1"
+            >
+              <div style={{ color: "#808191" }}>
+                {firstName}
+                {lastName}
+              </div>
+              <DownOutlined />
+            </Row>
+          </Dropdown>
         </Row>
       </Col>
     </Row>
@@ -57,7 +100,7 @@ const WrapperNotification = styled.div`
     position: absolute;
     top: -10%;
     right: 0;
-    background: red;
+    background: #6C5DD3;
     width: 20px;
     height: 20px;
     line-height: 20px;
@@ -69,4 +112,11 @@ const WrapperNotification = styled.div`
 
 const WrapperAvatar = styled.div`
   padding: 0 10px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 40px;
+  }
 `;

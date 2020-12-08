@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { Form, Button } from "antd";
 
 import styled from "styled-components";
 
-import { Form, Button } from "antd";
+import { useDispatch } from "react-redux";
+
+import UserApi from "api/UserApi";
 
 import { AuthLayout } from "layout/AuthLayout";
 
 import { InputCustomer } from "components/InputCustomer";
 
+import { actions } from "redux-store/auth";
 import { ReactComponent as Email } from "assets/images/IC/email.svg";
 import { ReactComponent as Pass } from "assets/images/IC/Password.svg";
 
@@ -17,10 +21,26 @@ import { ReactComponent as Google } from "assets/images/IC/Google.svg";
 import { ReactComponent as Facebook } from "assets/images/IC/FB.svg";
 
 const Login = () => {
+  let history = useHistory();
+  const dispatch = useDispatch();
+
+  const onFinish = (value) => {
+    const { email, password } = value;
+    UserApi.login({
+      email,
+      password,
+    }).then((res) => {
+      const { data, status } = res;
+      if (status && status === 200) {
+        dispatch(actions.login(data));
+        history.push("/");
+      }
+    });
+  };
   return (
     <AuthLayout>
       <h2>Log In</h2>
-      <Form>
+      <Form onFinish={onFinish}>
         <InputCustomer
           label="email"
           placeholder="Nguyenthngochang@gmail.com"
@@ -30,6 +50,7 @@ const Login = () => {
 
         <InputCustomer
           label="password"
+          type="password"
           placeholder=""
           name="password"
           prefix={<Pass className="w-100 h-100" />}

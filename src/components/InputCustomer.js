@@ -31,7 +31,7 @@ export const InputCustomer = ({
           </WrapperPrefix>
           <div className="pl-2 label">{label}</div>
         </div>
-        <Input className="w-100 h-100" placeholder={placeholder} />
+        <Input type={type} className="w-100 h-100" placeholder={placeholder} />
       </WrapperInputCustomer>
     </Form.Item>
   );

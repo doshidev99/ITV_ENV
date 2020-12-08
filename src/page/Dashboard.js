@@ -8,7 +8,7 @@ const Dashboard = () => {
       <div className="w-100 h-100">
         <div
           style={{
-            height: "100%",
+            height: "100vh",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
