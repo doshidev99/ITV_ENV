@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Link, useHistory } from "react-router-dom";
-import { Form, Button } from "antd";
+import { Form, Button, notification } from "antd";
 
 import styled from "styled-components";
 
@@ -33,7 +33,16 @@ const Login = () => {
       const { data, status } = res;
       if (status && status === 200) {
         dispatch(actions.login(data));
+        notification.open({
+          key: "updatable",
+          message: "Login Success",
+        });
         history.push("/");
+      } else {
+        notification.open({
+          key: "updatable",
+          message: `${res?.message}`,
+        });
       }
     });
   };

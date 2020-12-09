@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
 
 import "antd/dist/antd.css";
+
 import "./style.css";
 
 import { Spin } from "antd";

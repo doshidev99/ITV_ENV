@@ -11,7 +11,14 @@ export const InputCustomer = ({
   prefix,
 }) => {
   return (
-    <Form.Item name={name}>
+    <Form.Item
+      name={name}
+      // rules={[
+      //   {
+      //     required: true,
+      //   },
+      // ]}
+    >
       <WrapperInputCustomer>
         <div
           className="d-flex align-items-center"
@@ -22,6 +29,7 @@ export const InputCustomer = ({
           </WrapperPrefix>
           <div className="pl-2 label">{label}</div>
         </div>
+
         <Input type={type} className="w-100 h-100" placeholder={placeholder} />
       </WrapperInputCustomer>
     </Form.Item>

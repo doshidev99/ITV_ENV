@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Link, useHistory } from "react-router-dom";
 
-import { Form, Button } from "antd";
+import { Form, Button, notification } from "antd";
 
 import UserApi from "api/UserApi";
 
@@ -33,6 +33,10 @@ const Register = () => {
       timeZone,
     }).then((res) => {
       if (res?.status === 200) {
+        notification.open({
+          key: "updatable",
+          message: "Register Success",
+        });
         history.push("/login");
       }
     });
@@ -57,6 +61,7 @@ const Register = () => {
           label="password"
           placeholder=""
           name="password"
+          type="password"
           prefix={<Pass className="w-100 h-100" />}
         />
 

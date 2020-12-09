@@ -3,7 +3,6 @@ import React from "react";
 import { Row, Col } from "antd";
 
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
 
 import { ReactComponent as Logo } from "assets/images/logo.svg";
 

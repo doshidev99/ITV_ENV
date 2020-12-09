@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Row, Col, Dropdown, Menu } from "antd";
+import { Row, Col, Dropdown, Menu, notification } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
 import { useDispatch } from "react-redux";
@@ -19,6 +19,10 @@ export const NameWorkSpace = () => {
 
   const logout = () => {
     dispatch(actions.logout());
+    notification.open({
+      key: "updatable",
+      message: "Logout",
+    });
     history.push("/login");
   };
 
