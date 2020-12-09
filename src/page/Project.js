@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import {
@@ -24,19 +24,33 @@ import { ListProject } from "components/ListProject";
 
 import { NameWorkSpace } from "components/NameWorkSpace";
 
+import Pagination from "components/Pagination";
+import { LIMIT } from "constant";
+
 const MyProject = () => {
+  const [currentOffset, setCurrentOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    UserApi.getAllProject().then((res) => {
+    UserApi.getAllProject({ offset: currentOffset }).then((res) => {
       if (res?.status === 200) {
         dispatch(actions.getAllProject(res?.data));
       }
     });
-  }, [dispatch]);
+  }, [currentOffset, dispatch]);
 
-  const { listProjects = [] } = useSelector((state) => state?.projectReducer);
+  const { listProjects = [], total } = useSelector(
+    (state) => state?.projectReducer
+  );
 
+  const handleGetCurrentPage = (page) => {
+    const caculatorPage = currentOffset / LIMIT;
+    if (caculatorPage < total) {
+      setCurrentPage(page);
+      setCurrentOffset((page - 1) * LIMIT);
+    }
+  };
   return (
     <CmsLayout>
       <div className="w-100 h-100">
@@ -90,42 +104,11 @@ const MyProject = () => {
               <ListProject key={index} element={el} />
             ))}
 
-          <WrapperPagination>
-            <div className="w-100">
-              <Row align="middle" justify="center">
-                <Col className="mx-2">
-                  <div
-                    style={{
-                      background: "#6C5DD3",
-                      borderRadius: "8px",
-                      width: "29px",
-                      height: "29px",
-                      lineHeight: "29px",
-                      textAlign: "center",
-                      color: "#fff",
-                    }}
-                  >
-                    1
-                  </div>
-                </Col>
-                <Col>
-                  <div
-                    style={{
-                      background: "#6C5DD3",
-                      borderRadius: "8px",
-                      width: "29px",
-                      height: "29px",
-                      lineHeight: "29px",
-                      textAlign: "center",
-                      color: "#fff",
-                    }}
-                  >
-                    2
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </WrapperPagination>
+          <Pagination
+            total={total}
+            currentPage={currentPage}
+            handleGetCurrentPage={handleGetCurrentPage}
+          />
         </WrapperListProject>
       </div>
     </CmsLayout>
@@ -245,5 +228,4 @@ const WrapperListProject = styled.div`
   border-radius: 24px;
 `;
 
-const WrapperPagination = styled.div``;
 export default MyProject;

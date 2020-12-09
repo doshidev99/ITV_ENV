@@ -8,8 +8,6 @@ import { menuMapping } from "constant";
 
 export const ListMenu = (props) => {
   const { pathname } = useLocation();
-  // eslint-disable-next-line no-console
-  console.log(pathname, "pathname");
   return (
     <WrapperListMenu>
       {menuMapping.map((menu) => (

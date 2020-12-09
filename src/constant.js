@@ -29,3 +29,5 @@ export const PATH = {
   register: "/register",
   myProject: "/project",
 };
+
+export const LIMIT = 5;

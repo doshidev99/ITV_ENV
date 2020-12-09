@@ -15,7 +15,6 @@ const { actions, reducer } = createSlice({
     login: (state, action) => {
       state.isLogedIn = true;
       state.userInfo = action.payload;
-      console.log(action.payload);
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("isLogedIn", "true");

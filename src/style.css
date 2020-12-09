@@ -3,6 +3,15 @@
   src: url("./assets/fonts/SFProDisplay.ttf");
 }
 
+#app {
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+img {
+  width: 100%;
+}
+
 .w-100 {
   width: 100%;
 }

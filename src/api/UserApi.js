@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import { LIMIT } from "constant";
 const URL = process.env.REACT_APP_SERVER_URL;
 
 axios.interceptors.request.use(function (config) {
@@ -20,8 +21,10 @@ class UserApi {
     return axios.post(`${URL}/client/auth/register`, data);
   };
 
-  static getAllProject = () => {
-    return axios.get(`${URL}/client/projects`);
+  static getAllProject = (payload) => {
+    return axios.get(`${URL}/client/projects?limit=${LIMIT}`, {
+      params: payload,
+    });
   };
 }
 

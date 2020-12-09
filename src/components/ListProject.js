@@ -13,8 +13,6 @@ import { ReactComponent as Share } from "assets/images/share.svg";
 
 export const ListProject = ({ element }) => {
   const { name, tags, medias, createdAt } = element;
-  // eslint-disable-next-line no-console
-  console.log(tags, "name");
   return (
     <WrapperProject>
       <Row justify="space-between" align="middle" className="py-3">

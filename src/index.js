@@ -6,6 +6,8 @@ import { createBrowserHistory } from "history";
 import "antd/dist/antd.css";
 import "./style.css";
 
+import { Spin } from "antd";
+
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -24,7 +26,7 @@ export const history = createBrowserHistory();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Suspense fallback={<div> loading </div>}>
+    <Suspense fallback={<Spin />}>
       <App history={history} />
     </Suspense>
   </Provider>,

@@ -11,16 +11,7 @@ export const InputCustomer = ({
   prefix,
 }) => {
   return (
-    <Form.Item
-      // label={name}s
-      name={name}
-      // rules={[
-      //   {
-      //     required: true,
-      //     message: "Please input your username!",
-      //   },
-      // ]}
-    >
+    <Form.Item name={name}>
       <WrapperInputCustomer>
         <div
           className="d-flex align-items-center"
@@ -43,7 +34,7 @@ const WrapperInputCustomer = styled.div`
   outline: "none";
   margin: 0 auto;
   > input {
-		color: #fff;
+    color: #fff;
     border-radius: 12px;
     background: #6c5dd3;
     border: none;
